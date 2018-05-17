@@ -1,17 +1,37 @@
 package com.mycompany.my.primefaces.portlet;
 
+import com.mycompany.my.primefaces.portlet.service.TestService;
+import com.mycompany.my.primefaces.portlet.service.impl.TestServiceImpl;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 import java.io.Serializable;
 
 @ManagedBean(name="testPortlet")
 @SessionScoped
 public class TestPortlet implements Serializable {
-	private String name = "Andrey";
-	private String age = "23";
-	private String tall;
+	private String name;
+	private int age;
+	private int tall;
 	private String result;
+
+	private TestService testService = new TestServiceImpl();
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getTall() {
+		return tall;
+	}
+
+	public void setTall(int tall) {
+		this.tall = tall;
+	}
 
 	public String getResult() {
 		return result;
@@ -29,31 +49,7 @@ public class TestPortlet implements Serializable {
 		this.name = name;
 	}
 
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
-
-	public String getTall() {
-		return tall;
-	}
-
-	public void setTall(String tall) {
-		this.tall = tall;
-	}
-
 	public void countWeight() {
-		float tall = Float.parseFloat(getTall());
-		int age = Integer.parseInt(getAge());
-		if (age <= 40) {
-			tall = tall - 110;
-		} else {
-			tall = tall - 100;
-		}
-		result = "Dear " + name + ", your optimal weight is: " + String.valueOf(tall);
+		 result = testService.countWeight(name, age, tall);
 	}
-
 }

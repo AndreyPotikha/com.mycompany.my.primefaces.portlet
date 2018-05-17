@@ -12,17 +12,37 @@
 
 	<h:body>
 
-		<p:inputText value="#{testPortlet.name}"/>
-		<br/>
-		<p:inputText value="#{testPortlet.age}"/>
-		<br/>
-		<p:inputText value="#{testPortlet.tall}"/>
-		<br/>
-		<p:commandButton value="Count" actionListener="#{testPortlet.countWeight}"/>
-		<p:commandButton value="Count2" action="#{testPortlet.countWeight}"/>
-		<br/>
+		<h:form>
 
-			<h:outputLabel id="result_column" value="#{testPortlet.result}" />
+            <h:panelGrid id="grid" columns="3" cellpadding="5">
+
+				<p:outputLabel for="name" value="Name" />
+				<p:inputText id="name" label="Name" value="#{testPortlet.name}">
+					<f:validateLength minimum="1" maximum="50" />
+				</p:inputText>
+				<p:message for="name"/>
+
+				<p:outputLabel for="age" value="Age"/>
+				<p:inputText id="age" label="Age" value="#{testPortlet.age}">
+					<f:validateDoubleRange minimum="5" maximum="120"/>
+				</p:inputText>
+				<p:message for="age"/>
+
+				<p:outputLabel for="tall" value="Height" />
+				<p:inputText id="tall" label="Tall" value="#{testPortlet.tall}">
+					<f:validateDoubleRange minimum="1" maximum="300"/>
+				</p:inputText>
+				<h:message for="tall"/>
+
+				<p:outputLabel id="result_column" value="#{testPortlet.result}" />
+
+			</h:panelGrid>
+
+            <br/>
+
+            <p:commandButton value="Count" action="#{testPortlet.countWeight}" update="grid"/>
+
+		</h:form>
 
 	</h:body>
 
